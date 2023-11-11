@@ -2,8 +2,8 @@ import pandas as pd
 pd.options.display.max_rows = 60 #màxim de files quepoden mostrar les taules
 
 #LLegim les dades
-csv_producte_path='C:\Users\Joan Salazar\Desktop\datathon-2023\datathon\dataset\product_data'
-csv_outfit_path='C:\Users\Joan Salazar\Desktop\datathon-2023\datathon\dataset\outfit_data'
+csv_producte_path='../datathon/dataset/product_data.csv'
+csv_outfit_path='../datathon/dataset/outfit_data.csv'
 df_producte = pd.read_csv(csv_producte_path, sep=",")
 df_outfit = pd.read_csv(csv_outfit_path, sep=",")
 
