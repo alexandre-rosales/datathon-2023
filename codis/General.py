@@ -3,15 +3,11 @@ import numpy as np
 
 
 categories = ['cod_modelo_color',
-              'cod_color_code',
               'des_color_specification_esp',
               'des_agrup_color_eng',
               'des_sex',
               'des_age',
-              'des_line',
               'des_fabric',
-              'des_product_category',
-              'des_product_aggregated_family',
               'des_product_family',
               'des_product_type',
               'des_filename']
@@ -56,8 +52,8 @@ class Valor():
         if not valor.n in self.adjacents: return -1
         return 100/self.adjacents[valor.n]
 
-csv_producte_path='../datathon/dataset/product_data.csv'
-csv_outfit_path='../datathon/dataset/outfit_data.csv'
+csv_producte_path='../datathon/dataset_filtered/product_data_filtered.csv'
+csv_outfit_path='../datathon/dataset_filtered/outfit_data_filtered.csv'
 df_producte = pd.read_csv(csv_producte_path, sep=",")
 df_outfit = pd.read_csv(csv_outfit_path, sep=",")
 
@@ -109,3 +105,4 @@ class Estructura():
 
     def obtenir_DICT(self, c):
         return self.CATEGORIA[c]['DICT']
+
