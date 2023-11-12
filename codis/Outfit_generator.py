@@ -2,6 +2,8 @@ from General import Estructura
 from Entrenament import Vectors
 import numpy as np
 from random import randint
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 
 train = Estructura(0,5000)
@@ -112,19 +114,14 @@ while i <= rand:
     else:
         list_dist.pop(-i)
 
+"""
 print("Codis de l'outfit generat:")
 for peca in outfit_final:
     print(peca.atributs['cod_modelo_color'])
-
+"""
 
 for peca in outfit_final:
-    n = len(categories) - 1
-    print(n)
-    image_path = peca.atributs[categories[n]]
-    
+    image_path = "../"+peca.atributs["des_filename"]
     img = mpimg.imread(image_path)
-    
     plt.imshow(img)
-
     plt.show()
-
