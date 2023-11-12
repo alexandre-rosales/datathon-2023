@@ -54,18 +54,6 @@ for i in categories1:
     print(df_producte[i].unique())
 
 
-# Filtrem les dades eliminant aquelles files que 
-families_eliminar= ['Trousers', 'Jeans', 'Dresses', 'Shirt', 'Sweater', 'Skirts', 'Jewellery', 
-           'Bags', 'Glasses', 'Wallets & cases', 'Shorts', 'Tops', 'Belts and Ties',
-           'Jumpsuit', 'Jackets', 'Coats', 'Footwear', 'Hats, scarves and gloves',
-           'T-shirt', 'Blazers', 'Gadgets', 'Swimwear', 'Vest', 'Fragances', 'Cardigans',
-           'Trenchcoats', 'Puffer coats', 'Outer Vest', 'Leggings and joggers', 
-           'Deco Accessories', 'Poloshirts', 'Intimate', 'Sweatshirts', 'Deco Textiles',
-           'Bedding', 'Bodysuits', 'Leather jackets', 'Parkas', 'Glassware']
-
-df_producte_filtered = df_producte.loc[~df_producte['des_product_family'].isin(families_eliminar)]
-df_producte_filtered
-
 #### Eliminem les columnes innecessàries
 columnes_borrar=['cod_color_code', 'des_line', 'des_product_category', 'des_product_aggregated_family']
 df_producte_filtered1=df_producte.drop(columnes_borrar, axis=1)
