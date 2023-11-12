@@ -81,7 +81,9 @@ class Estructura():
             for cod in outfit.cod_peces:
                 if not cod in self.PECA:
                     n = len(self.peces)
-                    self.PECA[cod] = Peca(PECA[cod], n)
+                    p = Peca(PECA[cod], n)
+                    self.PECA[cod] = p
+                    self.peces.append(p)
 
             for cod1 in outfit.cod_peces:
                 for cod2 in outfit.cod_peces:
@@ -93,7 +95,9 @@ class Estructura():
             for cod in outfit.cod_peces:
                 if not cod in self.CATEGORIA[c]['DICT']:
                     n = len(self.CATEGORIA[c]['list'])
-                    self.CATEGORIA[c]['DICT'][cod] = Valor(PECA[cod][categories.index(c)], n)
+                    v = Valor(PECA[cod][categories.index(c)], n)
+                    self.CATEGORIA[c]['DICT'][cod] = v
+                    self.CATEGORIA[c]['list'].append(v)
 
             for cod1 in outfit.cod_peces:
                 for cod2 in outfit.cod_peces:
