@@ -115,3 +115,16 @@ while i <= rand:
 print("Codis de l'outfit generat:")
 for peca in outfit_final:
     print(peca.atributs['cod_modelo_color'])
+
+
+for peca in outfit_final:
+    n = len(categories) - 1
+    print(n)
+    image_path = peca.atributs[categories[n]]
+    
+    img = mpimg.imread(image_path)
+    
+    plt.imshow(img)
+
+    plt.show()
+
