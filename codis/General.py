@@ -93,16 +93,20 @@ class Estructura():
         self.CATEGORIA[c] = {'DICT':{}, 'list':[]}
         for outfit in self.outfits.values():
             for cod in outfit.cod_peces:
-                if not cod in self.CATEGORIA[c]['DICT']:
+                textVal = PECA[cod][categories.index(c)]
+                if not textVal in self.CATEGORIA[c]['DICT']:
                     n = len(self.CATEGORIA[c]['list'])
-                    v = Valor(PECA[cod][categories.index(c)], n)
-                    self.CATEGORIA[c]['DICT'][cod] = v
+                    v = Valor(textVal, n)
+                    self.CATEGORIA[c]['DICT'][textVal] = v
                     self.CATEGORIA[c]['list'].append(v)
 
             for cod1 in outfit.cod_peces:
+                textVal1 = PECA[cod1][categories.index(c)]
                 for cod2 in outfit.cod_peces:
-                    if cod1 != cod2:
-                        self.CATEGORIA[c]['DICT'][cod1].connectar(self.CATEGORIA[c]['DICT'][cod2])
+                    textVal2 = PECA[cod2][categories.index(c)]
+                    if textVal1 != textVal2:
+                        self.CATEGORIA[c]['DICT'][textVal1].connectar(
+                            self.CATEGORIA[c]['DICT'][textVal2])
 
     def obtenir_list(self, c):
         return self.CATEGORIA[c]['list']
