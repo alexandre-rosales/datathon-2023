@@ -1,15 +1,23 @@
-from General import Estructura, categories
+from General import Estructura
+from Entrenament import Vectors
 import numpy as np
+from random import randint
 
-peca_actual=() #canviar pel que sigui
 
 train = Estructura(0,5000)
 train.estructura_peces()
+vectors = Vectors(train, 2)
+for peca in train.peces:
+    peca.pos = vectors.peca_a_vector(peca)
 
+codi_peca = input("Introduïu el codi de la primera peça de l'outfit: ")
+#codi_peca = "41085800-02"
+#for i in list(train.PECA.keys())[:20]: print(i)
+peca_actual=train.PECA[codi_peca]
 
 list_dist=[]
 for peca in train.peces:
-    dist = np.linalg.norm(peca.pos-peca_actual)
+    dist = np.linalg.norm(peca.pos-peca_actual.pos)
     parella=[dist, peca]
     list_dist.append(parella)
 list_dist.sort(key=lambda x: x[0], reverse=True)
@@ -40,33 +48,33 @@ else:
 if need_part_baix:
     i = 1
     parella_i = list_dist[-i]
-    peca_i = parella_i[2]
+    peca_i = parella_i[1]
     while (peca_i.atributs['des_product_family'] != 'Trousers' or 'Jeans' or 'Skirts' or 'Shorts' or 'Jumpsuit' or 'Leggins and joggers') and (peca_actual.atributs['des_sex'] == peca_i.atributs['des_sex']) and (peca_actual.atributs['des_age'] == peca_i.atributs['des_age']):
         i+=1
         parella_i = list_dist[-i]
-        peca_i = parella_i[2]
+        peca_i = parella_i[1]
     outfit_final.append(peca_i)
     list_dist.pop(-i)
 
 if need_part_dalt:
     i = 1
     parella_i = list_dist[-i]
-    peca_i = parella_i[2]
+    peca_i = parella_i[1]
     while (peca_i.atributs['des_product_family'] != 'Dresses' or 'Shirt' or 'Swetter' or 'Tops' or 'T-shirt' or 'Bodysuits') and (peca_actual.atributs['des_sex'] == peca_i.atributs['des_sex']) and (peca_actual.atributs['des_age'] == peca_i.atributs['des_age']):
         i+=1
         parella_i = list_dist[-i]
-        peca_i = parella_i[2]
+        peca_i = parella_i[1]
     outfit_final.append(peca_i)
     list_dist.pop(-i)
 
 if need_sabates:
     i = 1
     parella_i = list_dist[-i]
-    peca_i = parella_i[2]
+    peca_i = parella_i[1]
     while (peca_i.atributs['des_product_family'] != 'Footware') and (peca_actual.atributs['des_sex'] == peca_i.atributs['des_sex']) and (peca_actual.atributs['des_age'] == peca_i.atributs['des_age']):
         i+=1
         parella_i = list_dist[-i]
-        peca_i = parella_i[2]
+        peca_i = parella_i[1]
     outfit_final.append(peca_i)
     list_dist.pop(-i)
 
@@ -76,14 +84,14 @@ if need_sabates:
 
 #suposem que acceptem com a màxim 4 items més
 i = 1
-while i <= np.randint(1,4):
+while i <= randint(1,4):
     parella_i = list_dist[-i]
-    peca_i = parella_i[2]
+    peca_i = parella_i[1]
     #if (mateixa edat)(mateix gènere)(no és part de dalt, ni de baix, ni sabates)
     if (peca_actual.atributs['des_sex'] == peca_i.atributs['des_sex']) and (peca_actual.atributs['des_age'] == peca_i.atributs['des_age']) and (peca_i.atributs['des_product_family'] != 'Dresses' or 'Shirt' or 'Swetter' or 'Tops' or 'T-shirt' or 'Bodysuits') and (peca_i.atributs['des_product_family'] != 'Trousers' or 'Jeans' or 'Skirts' or 'Shorts' or 'Jumpsuit' or 'Leggins and joggers') and (peca_i.atributs['des_product_family'] != 'Footware'):
         repetit = False
         for product in outfit_final:
-            if peca_i.atributs['des_product_family']==product.atributs['des_product_family']
+            if peca_i.atributs['des_product_family']==product.atributs['des_product_family']:
                 repetit = True
         if not repetit:
             outfit_final.append(peca_i)
@@ -92,3 +100,7 @@ while i <= np.randint(1,4):
             list_dist.pop(-i)
     else:
         list_dist.pop(-i)
+
+print("Codis de l'outfit generat:")
+for peca in outfit_final:
+    print(peca.atributs['cod_modelo_color'])
