@@ -9,7 +9,7 @@ import matplotlib.image as mpimg
 train = Estructura(0,5000)
 train.estructura_peces()
 vectors = Vectors(train, 2)
-print(len(train.peces))
+#print(len(train.peces))
 for peca in train.peces:
     peca.pos = vectors.peca_a_vector(peca)
 
@@ -31,22 +31,22 @@ outfit_final=[peca_actual]
 
 # PART 1: TROBEM UNA PART DE DALT, UNA PART DE BAIX I UNES SABATES
 
-if peca_actual.atributs['des_product_family'] in ('Trousers', 'Jeans', 'Skirts', 'Shorts', 'Jumpsuit', 'Leggins and joggers'):
+if peca_actual.atributs['des_product_family'] in ('Trousers', 'Jeans', 'Skirts', 'Shorts', 'Leggins and joggers'):
     need_part_baix = False
     need_part_dalt = True
     need_sabates = True
-    if peca_actual.atributs['des_product_family'] == 'Jumpsuit':
-        need_part_dalt = False
-elif peca_actual.atributs['des_product_family'] in ('Dresses', 'Shirt', 'Sweater', 'Tops', 'T-shirt', 'Bodysuits'):
+elif peca_actual.atributs['des_product_family'] in ('Shirt', 'Sweater', 'Tops', 'T-shirt', 'Bodysuits'):
     need_part_baix = True
     need_part_dalt = False
     need_sabates = True
-    if peca_actual.atributs['des_product_family'] == 'Dresses':
-        need_part_baix = False
 elif peca_actual.atributs['des_product_family'] == 'Footwear':
     need_part_baix = True
     need_part_dalt = True
     need_sabates = False
+elif peca_actual.atributs['des_product_family'] in ('Dresses', 'Jumpsuit'):
+    need_part_baix = False
+    need_part_dalt = False
+    need_sabates = True
 else:
     need_part_baix = True
     need_part_dalt = True
@@ -84,11 +84,20 @@ if need_sabates:
     i = 1
     parella_i = list_dist[-i]
     peca_i = parella_i[1]
-    while (peca_i.atributs['des_product_family'] != 'Footwear') and (peca_actual.atributs['des_sex'] == peca_i.atributs['des_sex']) and (peca_actual.atributs['des_age'] == peca_i.atributs['des_age']):
+    while (peca_actual.atributs['des_sex'] != peca_i.atributs['des_sex']) or (peca_actual.atributs['des_age'] != peca_i.atributs['des_age']):
+        while (peca_i.atributs['des_product_family'] != 'Footwear'):
+            i+=1
+            parella_i = list_dist[-i]
+            peca_i = parella_i[1]
         i+=1
         parella_i = list_dist[-i]
         peca_i = parella_i[1]
+    i-=1
+    parella_i = list_dist[-i]
+    peca_i = parella_i[1]
     outfit_final.append(peca_i)
+    print()
+    print("aacabo d'afegir una sabata:", peca_i.atributs['cod_modelo_color'], peca_i.atributs['des_product_family'])
     list_dist.pop(-i)
 
 # JA TENIM PART DE DALT, PART DE BAIX I SABATES ;) (coincident en gènere i edat)
@@ -97,7 +106,7 @@ if need_sabates:
 
 #suposem que acceptem com a màxim 4 items més
 i = 1
-rand = randint(1,4)
+rand = randint(2,4)
 while i <= rand:
     parella_i = list_dist[-i]
     peca_i = parella_i[1]
@@ -119,11 +128,12 @@ while i <= rand:
     else:
         list_dist.pop(-i)
 
-"""
-print("Codis de l'outfit generat:")
+
+print()
+print("Peces de l'outfit:")
 for peca in outfit_final:
-    print(peca.atributs['cod_modelo_color'])
-"""
+    print(peca.atributs['cod_modelo_color'], ":  ", peca.atributs['des_product_family'])
+
 
 imatges = []
 for peca in outfit_final:
