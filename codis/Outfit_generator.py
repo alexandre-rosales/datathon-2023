@@ -28,6 +28,7 @@ list_dist.sort(key=lambda x: x[0], reverse=True)
 
 # Generem l'outfit
 outfit_final=[peca_actual]
+list_dist.pop(-1)
 
 # PART 1: TROBEM UNA PART DE DALT, UNA PART DE BAIX I UNES SABATES
 
@@ -56,13 +57,19 @@ if need_part_baix:
     i = 1
     parella_i = list_dist[-i]
     peca_i = parella_i[1]
-    while ( (peca_i.atributs['des_product_family'] not in
-            ('Trousers', 'Jeans', 'Skirts', 'Shorts', 'Jumpsuit', 'Leggins and joggers'))
-            and (peca_actual.atributs['des_sex'] == peca_i.atributs['des_sex'])
-            and (peca_actual.atributs['des_age'] == peca_i.atributs['des_age']) ):
-                i+=1
-                parella_i = list_dist[-i]
-                peca_i = parella_i[1]
+    first=True
+    while ((peca_actual.atributs['des_sex'] != peca_i.atributs['des_sex']) or (peca_actual.atributs['des_age'] != peca_i.atributs['des_age']) or first):
+        first=False
+        while (peca_i.atributs['des_product_family'] not in ('Trousers', 'Jeans', 'Skirts', 'Shorts', 'Jumpsuit', 'Leggins and joggers')):
+            i+=1
+            parella_i = list_dist[-i]
+            peca_i = parella_i[1]
+        i+=1
+        parella_i = list_dist[-i]
+        peca_i = parella_i[1]
+    i-=1
+    parella_i = list_dist[-i]
+    peca_i = parella_i[1]
     outfit_final.append(peca_i)
     list_dist.pop(-i)
 
@@ -70,13 +77,19 @@ if need_part_dalt:
     i = 1
     parella_i = list_dist[-i]
     peca_i = parella_i[1]
-    while ( (peca_i.atributs['des_product_family'] not in
-           ('Dresses', 'Shirt', 'Sweater', 'Tops', 'T-shirt', 'Bodysuits'))
-            and (peca_actual.atributs['des_sex'] == peca_i.atributs['des_sex'])
-            and (peca_actual.atributs['des_age'] == peca_i.atributs['des_age']) ):
-                i+=1
-                parella_i = list_dist[-i]
-                peca_i = parella_i[1]
+    first=True
+    while ((peca_actual.atributs['des_sex'] != peca_i.atributs['des_sex']) or (peca_actual.atributs['des_age'] != peca_i.atributs['des_age']) or first):
+        first=False
+        while (peca_i.atributs['des_product_family'] not in ('Dresses', 'Shirt', 'Sweater', 'Tops', 'T-shirt', 'Bodysuits')):
+            i+=1
+            parella_i = list_dist[-i]
+            peca_i = parella_i[1]
+        i+=1
+        parella_i = list_dist[-i]
+        peca_i = parella_i[1]
+    i-=1
+    parella_i = list_dist[-i]
+    peca_i = parella_i[1]
     outfit_final.append(peca_i)
     list_dist.pop(-i)
 
@@ -84,7 +97,9 @@ if need_sabates:
     i = 1
     parella_i = list_dist[-i]
     peca_i = parella_i[1]
-    while (peca_actual.atributs['des_sex'] != peca_i.atributs['des_sex']) or (peca_actual.atributs['des_age'] != peca_i.atributs['des_age']):
+    first = True
+    while ((peca_actual.atributs['des_sex'] != peca_i.atributs['des_sex']) or (peca_actual.atributs['des_age'] != peca_i.atributs['des_age']) or first):
+        first=False
         while (peca_i.atributs['des_product_family'] != 'Footwear'):
             i+=1
             parella_i = list_dist[-i]
