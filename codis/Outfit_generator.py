@@ -35,11 +35,15 @@ if peca_actual.atributs['des_product_family'] in ('Trousers', 'Jeans', 'Skirts',
     need_part_baix = False
     need_part_dalt = True
     need_sabates = True
-elif peca_actual.atributs['des_product_family'] in ('Dresses', 'Shirt', 'Swetter', 'Tops', 'T-shirt', 'Bodysuits'):
+    if peca_actual.atributs['des_product_family'] == 'Jumpsuit':
+        need_part_dalt = False
+elif peca_actual.atributs['des_product_family'] in ('Dresses', 'Shirt', 'Sweater', 'Tops', 'T-shirt', 'Bodysuits'):
     need_part_baix = True
     need_part_dalt = False
     need_sabates = True
-elif peca_actual.atributs['des_product_family'] == 'Footware':
+    if peca_actual.atributs['des_product_family'] == 'Dresses':
+        need_part_baix = False
+elif peca_actual.atributs['des_product_family'] == 'Footwear':
     need_part_baix = True
     need_part_dalt = True
     need_sabates = False
@@ -67,7 +71,7 @@ if need_part_dalt:
     parella_i = list_dist[-i]
     peca_i = parella_i[1]
     while ( (peca_i.atributs['des_product_family'] not in
-           ('Dresses', 'Shirt', 'Swetter', 'Tops', 'T-shirt', 'Bodysuits'))
+           ('Dresses', 'Shirt', 'Sweater', 'Tops', 'T-shirt', 'Bodysuits'))
             and (peca_actual.atributs['des_sex'] == peca_i.atributs['des_sex'])
             and (peca_actual.atributs['des_age'] == peca_i.atributs['des_age']) ):
                 i+=1
@@ -80,7 +84,7 @@ if need_sabates:
     i = 1
     parella_i = list_dist[-i]
     peca_i = parella_i[1]
-    while (peca_i.atributs['des_product_family'] != 'Footware') and (peca_actual.atributs['des_sex'] == peca_i.atributs['des_sex']) and (peca_actual.atributs['des_age'] == peca_i.atributs['des_age']):
+    while (peca_i.atributs['des_product_family'] != 'Footwear') and (peca_actual.atributs['des_sex'] == peca_i.atributs['des_sex']) and (peca_actual.atributs['des_age'] == peca_i.atributs['des_age']):
         i+=1
         parella_i = list_dist[-i]
         peca_i = parella_i[1]
@@ -100,9 +104,9 @@ while i <= rand:
     #if (mateixa edat)(mateix gènere)(no és part de dalt, ni de baix, ni sabates)
     if ( (peca_actual.atributs['des_sex'] == peca_i.atributs['des_sex'])
         and (peca_actual.atributs['des_age'] == peca_i.atributs['des_age'])
-        and (peca_i.atributs['des_product_family'] not in ('Dresses', 'Shirt', 'Swetter', 'Tops', 'T-shirt', 'Bodysuits'))
+        and (peca_i.atributs['des_product_family'] not in ('Dresses', 'Shirt', 'Sweater', 'Tops', 'T-shirt', 'Bodysuits'))
         and (peca_i.atributs['des_product_family'] not in ('Trousers', 'Jeans', 'Skirts', 'Shorts', 'Jumpsuit', 'Leggins and joggers'))
-        and (peca_i.atributs['des_product_family'] != 'Footware') ):
+        and (peca_i.atributs['des_product_family'] != 'Footwear') ):
             repetit = False
             for product in outfit_final:
                 if peca_i.atributs['des_product_family']==product.atributs['des_product_family']:
