@@ -111,8 +111,6 @@ if need_sabates:
     parella_i = list_dist[-i]
     peca_i = parella_i[1]
     outfit_final.append(peca_i)
-    print()
-    print("aacabo d'afegir una sabata:", peca_i.atributs['cod_modelo_color'], peca_i.atributs['des_product_family'])
     list_dist.pop(-i)
 
 # JA TENIM PART DE DALT, PART DE BAIX I SABATES ;) (coincident en gènere i edat)
