@@ -9,6 +9,7 @@ import matplotlib.image as mpimg
 train = Estructura(0,5000)
 train.estructura_peces()
 vectors = Vectors(train, 2)
+print(len(train.peces))
 for peca in train.peces:
     peca.pos = vectors.peca_a_vector(peca)
 
@@ -120,8 +121,18 @@ for peca in outfit_final:
     print(peca.atributs['cod_modelo_color'])
 """
 
+imatges = []
 for peca in outfit_final:
     image_path = "../"+peca.atributs["des_filename"]
     img = mpimg.imread(image_path)
-    plt.imshow(img)
-    plt.show()
+    imatges.append(img)
+
+fig = plt.figure(figsize=(5,5))
+fig.add_subplot(2, 3, 2)
+plt.imshow(imatges[0])
+plt.axis('off')
+for i in range(1, len(imatges)):
+    fig.add_subplot(2, len(imatges)-1, len(imatges)-1+i)
+    plt.imshow(imatges[i])
+    plt.axis('off')
+plt.show()
